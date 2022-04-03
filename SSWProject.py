@@ -52,8 +52,6 @@ NOTES:
 """
 
 from email.errors import FirstHeaderLineIsContinuationDefect
-from socket import NI_NAMEREQD
-from cv2 import QT_RADIOBOX
 import pymongo
 from pymongo import MongoClient
 
