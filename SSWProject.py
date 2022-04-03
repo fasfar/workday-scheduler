@@ -1,5 +1,5 @@
 """
-
+NOTES:
     we have two users: advisor and student
     
     keep storing the bookings into the database - advisor level
@@ -51,6 +51,9 @@
              
 """
 
+from email.errors import FirstHeaderLineIsContinuationDefect
+from socket import NI_NAMEREQD
+from cv2 import QT_RADIOBOX
 import pymongo
 from pymongo import MongoClient
 
@@ -88,36 +91,6 @@ collection = db["Project"]
 #array.append(dictbooking)
 #array.append(dictbooking)
 
-
-#advisor   
-def adminInput():
-    
-    array = []
-    
-    name = input('Enter Name: ')
-    type = input('Enter Role: ')
-     
-    #temporary
-    hours = int(input('Monday Time (hrs): ') )
-    
-    minute = hours * 60;
-    cfloop = int(minute/30);
-    
-    time = 0;
-    for i in range(cfloop):
-        dictbooking = dict()
-        dictbooking["time"] = time
-        dictbooking["bool"] = False
-        dictbooking["name"] = ""
-        dictbooking["emailid"] = ""
-        dictbooking["comment"] = ""
-        array.append(dictbooking)
-        time = time + 30
-        
-    post = {"name":name, "type":type, "array": array}
-    
-    collection.insert_one(post)
-    
 def viewAvailability(userinput):
     
     persons = collection.find({"name":userinput})
@@ -126,10 +99,86 @@ def viewAvailability(userinput):
         for element in person["array"]:
             
             print(element)
+
+######################## - ADMIN FUNCTIONS - #################################
+
+def adminCreateProfile():
+    print("Create Admin Profile")
+    print()
+    
+    array = []
+    
+    name = input('Enter Name: ')
+    type = input('Enter Role: ')
+     
+   
+        
+    post = {"name":name, "type":type, "array": array}
+    
+    collection.insert_one(post)
+    
+def adminAddBooking():
+    print("Admin Add Booking")
+    print()
+    
+    temparray = []
+    
+    userinput = input("Enter Advisor: ")
+    persons = collection.find({"name":userinput})
+    for person in persons:
+       
+        temparray = person["array"]
+        
+        #temporary
+        hours = int(input('Time (hrs): ') )
+        
+        minute = hours * 60;
+        cfloop = int(minute/30);
+        
+        time = 0;
+        for i in range(cfloop):
+            dictbooking = dict()
+            dictbooking["time"] = time
+            dictbooking["bool"] = False
+            dictbooking["name"] = ""
+            dictbooking["emailid"] = ""
+            dictbooking["comment"] = ""
+            temparray.append(dictbooking)
+            time = time + 30
+            
+    collection.update_one({"name":userinput}, {"$set":{"array":temparray}})
+        
+    
+def adminDeleteBooking():
+    print("Admin Delete Booking")
+    print()
+    
+    #pop the booking
+    temparray = []
+    
+    userinput = input("Enter Advisor: ")
+    userinput1 = int(input("Enter Time: "))
+    
+    persons = collection.find({"name":userinput})
+    for person in persons:
+       
+        temparray = person["array"]
+        
+        for spot in temparray:
+            if spot["time"] == userinput1:
+                temparray.remove(spot)
+                
+    
+    collection.update_one({"name":userinput}, {"$set":{"array":temparray}})    
+        
         
        
-#student
-def spotbooking():
+######################## - STUDENT FUNCTIONS - #################################
+
+def acceptBooking():
+    print("Accept Booking")
+    print()
+    
     userinput = input('Enter Advisor: ')
     viewAvailability(userinput)
     time = int(input('What Time Slot: '))
@@ -159,16 +208,41 @@ def spotbooking():
     #print(temparray)
     
     collection.update_one({"name":userinput}, {"$set":{"array":temparray}})
+    
+def cancelBooking():
+    print("Cancel Booking")
+    print()
+    
+    #pop the booking
+    temparray = []
+    
+    userinput = input("Enter Advisor: ")
+    userinput1 = int(input("Enter Time: "))
+    userinput2 = input("Your Name: ")
+    
+    persons = collection.find({"name":userinput})
+    for person in persons:
+       
+        temparray = person["array"]
         
-            
+        for spot in temparray:
+            if spot["time"] == userinput1 and spot["name"] == userinput2:
+                spot["name"] = ""
+                spot["emailid"] = ""
+                spot["comment"] = ""
+                spot["bool"] = False
+    
+        
+    collection.update_one({"name":userinput}, {"$set":{"array":temparray}})     
 
     
 
 
-
-#adminInput()
 #viewAvailability()
-spotbooking()
-    
+#adminCreateProfile()
+#adminAddBooking()
+#adminDeleteBooking()
+#acceptBooking()
+#cancelBooking()
     
     
