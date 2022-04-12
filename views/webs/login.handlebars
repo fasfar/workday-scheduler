@@ -1,0 +1,65 @@
+<h1>Lgoin In</h1>
+<main>
+    <form action = "/login" method="POST" id="login-in">
+        <label for="Username" id="user">Username:</label><br>
+        <input type="text" id="Username" name="UsernameL"><br>
+        <label for="password" id="pass">Password:</label><br>
+        <input type="text" id="password" name="passwordL"><br>
+        <input type="submit" name="submit" value="submit">
+    </form>
+
+    {{#if userNameNotProvide}}
+    <p class = "error">You need to provide a user name</p>
+    {{/if}}
+
+    {{#if passWordsNotProvide}}
+    <p class = "error">You need to provide a password name</p>
+    {{/if}}
+
+    {{#if userNameNotString}}
+    <p class = "error">You need to provide a String type user name</p>
+    {{/if}}
+
+    {{#if passWordsNotString}}
+    <p class = "error">You need to provide a String type password name</p>
+    {{/if}}
+
+    {{#if AllSpacesU}}
+    <p class = "error">You can not enter all space in user name</p>
+    {{/if}}
+
+    {{#if AllSpacesP}}
+    <p class = "error">You can not enter all space in password</p>
+    {{/if}}
+
+    {{#if specialCharaUserName}}
+    <p class = "error">You can not have sepcial character in the user name</p>
+    {{/if}}
+
+    {{#if spaceInInput}}
+    <p class = "error">You can not have space in your user name or password</p>
+    {{/if}}
+
+    {{#if UsernameLessfour}}
+    <p class = "error">Your user name must have more than 4 characternumber</p>
+    {{/if}}
+
+    {{#if passwordLessSix}}
+    <p class = "error">Your password must have more than 6 characternumber</p>
+    {{/if}}
+
+    {{#if Checkfail}}
+    <p class = "error">Either the username or password is invalid</p>
+    {{/if}}
+
+    {{#if userNameFail}}
+    <p class = "error">Either the username or password is invalid</p>
+    {{/if}}
+
+
+
+</main>
+
+<a href="/signup"> Need to sign up? </a>
+
+

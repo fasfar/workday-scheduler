@@ -1,0 +1,13 @@
+<h1>Office hour order</h1>
+
+
+<main>
+    <form action = "/booking/{{userId.id}}" method="POST" id="new_order_page">
+        <label for="new_order_date" id="dateInfo">Choose a date (Your date must be mm/dd/yyyy):</label><br>
+        <input type="text" id="new_order_date" name="date"><br>    
+        <label for="new_order_time" id="timeInfo">Choose a time (Your time must be like 09:00, 11:00 or 15:00):</label><br>
+        <input type="time" id="new_order_time" name="time"><br>
+        <input type="submit" name="submit" value="submit"><br>
+
+    </form>
+</main>
