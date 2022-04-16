@@ -67,6 +67,11 @@ async function createOfficeHour(advioserId, studentId, date, time){
     const searchStudent = await orderData.findOne({_id:ObjectId(studentId)});
     if(searchAdvisor === null) throw "no advisor found"
     if(searchStudent === null) throw "no student found"
+    for(let k = 0; k<searchAdvisor.bookingTime.length; k++){
+        if(searchAdvisor.bookingTime[k].date ===date && searchAdvisor.bookingTime[k].time === time ){
+            return{Booked: true}
+        }
+    }
     let newOrder = {
         OrderId:ObjectId(),
         advioser: advioserId,
