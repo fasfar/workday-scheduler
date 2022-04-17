@@ -1,39 +1,42 @@
 <h1>Office hour order</h1>
+<div class="Order-content">
 
 
-<main>
-    <form action = "/booking/{{userId.id}}" method="POST" id="new_order_page">
-        <label for="new_order_date" id="dateInfo">Choose a date (Your date must be mm/dd/yyyy):</label><br>
-        <input type="text" id="new_order_date" name="date"><br>    
-        <label for="new_order_time" id="timeInfo">Choose a time (Your time must be like 09:00, 11:00 or 15:00):</label><br>
-        <input type="time" id="new_order_time" name="time"><br>
-        <input type="submit" name="submit" value="submit"><br>
+    <main>
+        <form action = "/booking/{{userId.id}}" method="POST" id="new_order_page">
+            <label for="new_order_date" id="dateInfo">Choose a date (Your date must be mm/dd/yyyy):</label><br>
+            <input type="text" id="new_order_date" name="date"><br>    
+            <label for="new_order_time" id="timeInfo">Choose a time (Your time must be like 09:00, 11:00 or 15:00):</label><br>
+            <input type="time" id="new_order_time" name="time"><br>
+            <input type="submit" name="submit" value="submit"><br>
 
-        <br><br><br><br>
-        <ul>
-        {{#each BookedList}}
-        <li>Booked Time: The Date: {{this.date}}  The Time:{{this.time}}</li>
-        {{/each}}
-        </ul>
-    </form>
+            <br><br><br><br>
+            <ul>
+            {{#each BookedList}}
+            <li>Booked Time: The Date: {{this.date}}  The Time:{{this.time}}</li>
+            {{/each}}
+            </ul>
+        </form>
 
 
-    {{#if MissingInfo}}
-    <p class = "error">Your input is missing information</p>
-    {{/if}}
-    {{#if NotString}}
-    <p class = "error">Your input is not right type</p>
-    {{/if}}
-    {{#if AllSpace}}
-    <p class = "error">Your input can not be all white space</p>
-    {{/if}}
-    {{#if InvalidDate}}
-    <p class = "error">Your input Date is not a valid Date</p>
-    {{/if}}
-    {{#if InvalidTime}}
-    <p class = "error">Your input Date is not a valid Time</p>
-    {{/if}}
-    {{#if Booked}}
-    <p class = "error">The office hour is booked, Please try other one</p>
-    {{/if}}
-</main>
+        {{#if MissingInfo}}
+        <p class = "error">Your input is missing information</p>
+        {{/if}}
+        {{#if NotString}}
+        <p class = "error">Your input is not right type</p>
+        {{/if}}
+        {{#if AllSpace}}
+        <p class = "error">Your input can not be all white space</p>
+        {{/if}}
+        {{#if InvalidDate}}
+        <p class = "error">Your input Date is not a valid Date</p>
+        {{/if}}
+        {{#if InvalidTime}}
+        <p class = "error">Your input Date is not a valid Time</p>
+        {{/if}}
+        {{#if Booked}}
+        <p class = "error">The office hour is booked, Please try other one</p>
+        {{/if}}
+    </main>
+
+</div>

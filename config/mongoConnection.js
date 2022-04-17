@@ -1,20 +1,37 @@
 const MongoClient = require('mongodb').MongoClient;
-const settings = require('./settings');
-const mongoConfig = settings.mongoConfig;
+const uri = "mongodb+srv://User1:1234567AB@cluster0.lqlde.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+let client = undefined
+let db = undefined
 
-let _connection = undefined;
-let _db = undefined;
 
-module.exports = {
-connectToDb: async () => {
-    if (!_connection) {
-      _connection = await MongoClient.connect(mongoConfig.serverUrl);
-      _db = await _connection.db(mongoConfig.database);
-    }
 
-    return _db;
-  },
-  closeConnection: () => {
-    _connection.close();
+async function main(){
+  
+  try{
+    await client.connect()
+    console.log('Database Connected successfully')
+  }catch(e){
+    console.log(`Error : ${e}`)
+  }finally{
+    await client.close()
   }
-};
+
+}
+// main().catch(console.error)
+module.exports = {
+    connectToDb: async () => {
+        if( ! client ){
+            try{
+                client = await MongoClient.connect(uri)
+                db = await client.db('540DataBase')
+            }catch(e){
+                console.log(`Error : ${e}`)
+            }
+            
+        }
+        return db
+    },
+    closeConnection: () => {
+        client.close()
+    }
+}
