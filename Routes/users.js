@@ -188,10 +188,10 @@ router.get('/private', async(req,res) =>{
         let orderList = personInfo.bookingTime;
         if(req.session.type === "Student"){
             console.log(advisorList)
-            res.render('webs/private', {Login: true, name : "Private"  ,user: req.session.user.Name, userIsStudent: true, Advisors: advisorList, orderInfor: orderList})
+            res.render('webs/private', {Login: true, name : "Private"  ,user: req.session.user.Name, userIsStudent: true, Advisors: advisorList, orderInfor: orderList, userTypeCheck: personInfo.userType})
         }
         if(req.session.type === "Advisor"){
-            res.render('webs/private', {Login: true, name : "Private"  ,user: req.session.user.Name, orderInfor: orderList})
+            res.render('webs/private', {Login: true, name : "Private"  ,user: req.session.user.Name, orderInfor: orderList, userTypeCheck: personInfo.userType})
         }
     }catch(e){
         console.log(e)

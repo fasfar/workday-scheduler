@@ -1,25 +1,28 @@
-<h1>Hi there, wlcome to Sprivate</h1>
+<h1>Information Page</h1>
+<div class="container row">
+            <div class="jumbotron col-sm-13 pull-center">
+                <div class = "personal-info-content">
+                    <main>
+                        <h3><b>Usertype :</b> {{userTypeCheck}}</h3><br>
+                        <h3><b>Here is your user name:</b> {{user}}</h3><br>
+                        <h3><b>Here are your appointments:</b></h3>
+                        
+                        {{#each orderInfor}}
+                        <h3>{{this.Name}} : Date: {{this.date}} and Time:{{this.time}}</h3>
+                        {{/each}}
+                        
 
-<div class = "personal-info-content">
-        <main>
-        <h1>You are a {{userTypeCheck}}</h1>
-        <h2>Here is your user name: {{user}}</h2>
-        <h3>Here is your order:</h3><br>
-        <ul>
-        {{#each orderInfor}}
-        <li>{{this.Name}} : The Date: {{this.date}}  The Time:{{this.time}}</li>
-        {{/each}}
-        </ul>
-
-        {{#if userIsStudent }}
-            <p1>make a order:</p1>
-            <ul>
-                {{#each Advisors}}
-                <li><a href = '/booking/{{this._id}}'>{{this.realName}}</li><br>
-                {{/each}}
-            </ul>
-        {{/if}}
-    </main>
+                        {{#if userIsStudent }}
+                        <br><h3><b>Advisors Available:</b></h3>
+                        
+                        {{#each Advisors}}
+                        <h3><a href = '/booking/{{this._id}}'>{{this.realName}}</h3>
+                        {{/each}}
+                        
+                        {{/if}}
+                    </main>
+                </div>
+            </div>        
 
     <a href="/logout"> Logout </a>
 

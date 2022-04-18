@@ -1,14 +1,20 @@
-<h1>Welcome to Workday</h1>
-<div class="signup-content">
-
-    <main>
-        <form action = "/login" method="POST" id="login-in">
-            <label for="Username" id="user">Username:</label><br>
-            <input type="text" id="Username" name="UsernameL"><br><br><br>
-            <label for="password" id="pass">Password:</label><br>
-            <input type="text" id="password" name="passwordL"><br>
-            <input type="submit" name="submit" value="submit">
-        </form>
+<div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+                <form action="/login" method="post" id="login-in">
+                    <div>
+                        <label>Username:</label>
+                        <input type="text" id="user" name="UsernameL"/>
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" id="pass" name="passwordL"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Log In"/>
+                    </div>
+                </form>                  
+            </div>          
+        </div>
 
         {{#if userNameNotProvide}}
         <p class = "error">You need to provide a user name</p>
@@ -57,9 +63,6 @@
         {{#if userNameFail}}
         <p class = "error">Either the username or password is invalid</p>
         {{/if}}
-
-
-        <a href="/signup"> Need to sign up? </a>
 
     </main>
 </div>
